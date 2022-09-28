@@ -8,7 +8,7 @@ const cors = require("cors");
 
 app.use(cors());
 
-const PORT = process.nev.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 const dbURI = "mongodb://marek:SaK5Gh5FQKn9Pfld@ac-iumnszd-shard-00-00.xv5ytxz.mongodb.net:27017,ac-iumnszd-shard-00-01.xv5ytxz.mongodb.net:27017,ac-iumnszd-shard-00-02.xv5ytxz.mongodb.net:27017/task-5?ssl=true&replicaSet=atlas-wk6ic3-shard-0&authSource=admin&retryWrites=true&w=majority"
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
