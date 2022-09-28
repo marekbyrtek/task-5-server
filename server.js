@@ -36,3 +36,14 @@ app.get("/users", (req, res) => {
             res.send(err);
         })
 })
+
+app.get("/users/:userId", (req, res) => {
+    const id = req.params.userId;
+    User.findById(id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            res.send(err);
+        })
+})

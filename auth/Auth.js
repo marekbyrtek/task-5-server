@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 exports.verify = (req, res, next) => {
     const checkAccessToken = req.header("accessToken");
     if (checkAccessToken) {
-        jwt,verify(checkAccessToken, "mySecretKey", (err, user) => {
+        jwt.verify(checkAccessToken, "mySecretKey", (err, user) => {
             if (err) {
                 return res.status(403).json("Token is not valid");
             }
