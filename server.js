@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
-const { register, login, verify } = require("./auth/Auth");
+const { register, login, verify,sendMessage } = require("./auth/Auth");
 const User = require("./models/User");
 const cors = require("cors");
 
@@ -19,6 +19,7 @@ mongoose.connect(dbURI, {
 
 app.post("/register", register);
 app.post("/login", login);
+app.put("/sendmessage", sendMessage);
 app.get("/auth", verify, (req, res) => {
     const user = req.user;
     res.status(200).json({

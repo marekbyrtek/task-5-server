@@ -61,3 +61,35 @@ exports.login = async (req, res) => {
         })
     }
 }
+
+exports.sendMessage = async (req, res) => {
+    const { sendEmail, reciveEmail, messageTitle, messageContent } = req.body;
+    try {
+        await User.findOne({ reciveEmail })
+        .then((user) => {
+            user.messages = [...user.messages, {
+                from: sendEmail,
+                title: messageTitle,
+                content: messageContent
+            }];
+            user.save((err) => {
+                if (err) {
+                    res.status(400).json({
+                        message: "An error occurred",
+                        error: console.log(err)
+                    });
+                    process.exit(1);
+                }
+                res.status(201).json({
+                    message: "Message send",
+                    user
+                })
+            })
+        })
+    } catch(err) {
+        res.status(400).json({
+            message: "No user",
+            error: console.log(err)
+        })
+    }
+}
