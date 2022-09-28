@@ -65,7 +65,7 @@ exports.login = async (req, res) => {
 exports.sendMessage = async (req, res) => {
     const { sendEmail, reciveEmail, messageTitle, messageContent } = req.body;
     try {
-        await User.findOne({ reciveEmail })
+        await User.findOne({email: reciveEmail})
         .then((user) => {
             user.messages = [...user.messages, {
                 from: sendEmail,
