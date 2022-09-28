@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 app.use(express.json());
-const { register } = require("./auth/Auth");
+const { register, login, verify } = require("./auth/Auth");
 const User = require("./models/User");
 const cors = require("cors");
 
@@ -18,6 +18,14 @@ mongoose.connect(dbURI, {
     .catch((err) => console.log(err));
 
 app.post("/register", register);
+app.post("/login", login);
+app.get("/auth", verify, (req, res) => {
+    const user = req.user;
+    res.status(200).json({
+        message: "It works",
+        user
+    })
+})
 
 app.get("/users", (req, res) => {
     User.find()
